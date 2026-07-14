@@ -1,0 +1,154 @@
+#Question 1
+
+# List of numbers divisible by 3 from 1 to 50
+numbers = []
+numbers = [i for i in range(1,51) if i % 3 == 0]
+print("Numbers:", numbers)
+print("Length:", len(numbers))
+
+QUESTON2
+
+words = ["python", "fun", "java", "ai", "data analysis", "practice", "patience", "go"]
+
+result = list(filter(lambda x: len(x) > 5, words))
+print(result)
+
+
+#3
+def calculate_tax(*salaries):
+    try:
+        for salary in salaries:
+            if not isinstance(salary, (int, float)):
+                raise TypeError("Salary must be numeric")
+
+        taxes = list(map(lambda x: x * 0.10, salaries))
+
+        print("Taxes:", taxes)
+
+        return sum(taxes)
+
+    except TypeError as e:
+        print("Type Error:", e)
+
+    except Exception as e:
+        print("Error:", e)
+
+
+total = calculate_tax(30000, 40000, 50000)
+
+print("Total Tax =", total)
+
+#4 map() + filter() (10 Marks)
+def calculate_tax(*salaries):
+    try:
+        for salary in salaries:
+            if not isinstance(salary, (int, float)):
+                raise TypeError("Salary must be numeric")
+
+        taxes = list(map(lambda x: x * 0.10, salaries))
+
+        print("Taxes:", taxes)
+
+        return sum(taxes)
+
+    except TypeError as e:
+        print("Type Error:", e)
+
+    except Exception as e:
+        print("Error:", e)
+
+
+total = calculate_tax(30000, 40000, 50000)
+
+print("Total Tax =", total)
+#s
+def fibonacci(n):
+    a = 0
+    b = 1
+
+    for i in range(n):
+        yield a
+        a, b = b, a + b
+
+
+print("Using for loop:")
+
+for num in fibonacci(10):
+    print(num, end=" ")
+
+print()
+
+print("Using next():")
+
+gen = fibonacci(10)
+
+print(next(gen))
+print(next(gen))
+print(next(gen))
+print(next(gen))
+
+QUESTION#6
+
+import student_utils
+import json
+
+students = []
+
+report = open("report.txt", "w")
+
+for i in range(3):
+
+    try:
+
+        name = input("Enter Name: ")
+
+        m1 = float(input("Subject1: "))
+        m2 = float(input("Subject2: "))
+        m3 = float(input("Subject3: "))
+
+        if m1 < 0 or m1 > 100 or m2 < 0 or m2 > 100 or m3 < 0 or m3 > 100:
+            raise ValueError("Marks should be between 0 and 100")
+
+        avg = student_utils.calculate_average(m1, m2, m3)
+
+        grade = student_utils.get_grade(avg)
+
+        students.append({
+            "name": name,
+            "average": avg,
+            "grade": grade
+        })
+
+        report.write(f"Name: {name} | Average: {avg:.2f} | Grade: {grade}\n")
+
+    except ValueError as e:
+        print(e)
+
+    except Exception:
+        print("Invalid Input")
+
+report.close()
+
+with open("students.json", "w") as f:
+    json.dump(students, f, indent=4)
+
+print("\nReport.txt")
+
+with open("report.txt", "r") as f:
+    print(f.read())
+
+print("\nStudents.json")
+
+with open("students.json", "r") as f:
+    print(f.read())
+
+print("\nUsing readlines()")
+
+with open("report.txt", "r") as f:
+    lines = f.readlines()
+
+for i, line in enumerate(lines, start=1):
+    print(i, line.strip())
+
+#7
+    

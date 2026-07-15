@@ -1,0 +1,145 @@
+student_utils.py
+
+def get_grade(avg, pass_mark=40):
+
+    if avg >= 90:
+        return "A"
+
+    elif avg >= 75:
+        return "B"
+
+    elif avg >= 50:
+        return "C"
+
+    elif avg >= pass_mark:
+        return "D"
+
+    else:
+        return "Fail"
+
+
+def calculate_average(*marks):
+    return sum(marks) / len(marks)
+
+main.py
+import student_utils
+import json
+
+students = []
+
+for i in range(3):
+
+    print("\nStudent", i + 1)
+
+    name = input("Enter Name: ")
+
+    while True:
+
+        try:
+
+            m1 = float(input("Enter Marks of Subject 1: "))
+            m2 = float(input("Enter Marks of Subject 2: "))
+            m3 = float(input("Enter Marks of Subject 3: "))
+
+            if m1 < 0 or m1 > 100 or m2 < 0 or m2 > 100 or m3 < 0 or m3 > 100:
+                raise ValueError
+
+            break
+
+        except ValueError:
+            print("Invalid marks! Please enter values between 0 and 100.")
+
+    average = student_utils.calculate_average(m1, m2, m3)
+
+    grade = student_utils.get_grade(average)
+
+    students.append({
+        "name": name,
+        "marks": [m1, m2, m3],
+        "average": average,
+        "grade": grade
+    })
+
+# Write report.txt
+file = open("report.txt", "w")
+
+for student in students:
+
+    file.write(
+        f"Name: {student['name']} | Average: {student['average']:.2f} | Grade: {student['grade']}\n"
+    )
+
+file.close()
+
+# Write students.json
+file = open("students.json", "w")
+
+json.dump(students, file, indent=4)
+
+file.close()
+
+
+print("\nContents of report.txt\n")
+
+file = open("report.txt", "r")
+
+print(file.read())
+
+file.close()
+
+
+print("\nContents of students.json\n")
+
+file = open("students.json", "r")
+
+print(file.read())
+
+file.close()
+
+print("\nReading report.txt line by line\n")
+
+file = open("report.txt", "r")
+
+lines = file.readlines()
+
+for i, line in enumerate(lines, start=1):
+
+    print(f"Line {i}: {line.strip()}")
+
+file.close()
+
+
+json 
+
+[
+    {
+        "name": "Priya",
+        "marks": [
+            90.0,
+            85.0,
+            87.0
+        ],
+        "average": 87.33333333333333,
+        "grade": "B"
+    },
+    {
+        "name": "Raj",
+        "marks": [
+            60.0,
+            50.0,
+            52.0
+        ],
+        "average": 54.0,
+        "grade": "C"
+    },
+    {
+        "name": "Aman",
+        "marks": [
+            95.0,
+            92.0,
+            90.0
+        ],
+        "average": 92.33333333333333,
+        "grade": "A"
+    }
+]

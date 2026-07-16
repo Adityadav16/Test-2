@@ -1,0 +1,8 @@
+celsius = [20, 35, 40, 50, 60]
+
+fahrenheit = list(map(lambda c: (c * 9/5) + 32, celsius))
+
+above100 = list(filter(lambda f: f > 100, fahrenheit))
+
+print("Fahrenheit:", fahrenheit)
+print("Above 100°F:", above100)

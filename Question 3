@@ -1,0 +1,22 @@
+def calculate_tax(*salaries):
+    try:
+        for salary in salaries:
+            if not isinstance(salary, (int, float)):
+                raise TypeError("Salary must be numeric")
+
+        taxes = list(map(lambda x: x * 0.10, salaries))
+
+        print("Taxes:", taxes)
+
+        return sum(taxes)
+
+    except TypeError as e:
+        print("Type Error:", e)
+
+    except Exception as e:
+        print("Error:", e)
+
+
+total = calculate_tax(30000, 40000, 50000)
+
+print("Total Tax =", total)
